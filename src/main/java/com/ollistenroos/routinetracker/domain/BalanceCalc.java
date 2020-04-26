@@ -47,7 +47,7 @@ public class BalanceCalc {
 		} else if (time < 1440){
 			timeString = Integer.toString(time/60) + " hours and " + Integer.toString(time%60) + " minutes";
 		} else {
-			timeString = Integer.toString(time/1440) + " day(s), " + Integer.toString(time/60) + " hour(s) and " + Integer.toString(time%60) + " minutes";
+			timeString = Integer.toString(time/1440) + " day(s), " + Integer.toString((time/60)%24) + " hour(s) and " + Integer.toString(time%60) + " minutes";
 		}
 		return timeString;
 	}
