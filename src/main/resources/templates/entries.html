@@ -1,0 +1,59 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+	<link type="text/css" rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" th:href="@{https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css}"/>
+    <title>Routine Tracker</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<div class="container">
+	<h1 th:text="${routineName}">Entries</h1>
+	<div class="row">
+		<div class="col-md-10">
+			<h3 th:inline="text">Welcome [[${#httpServletRequest.remoteUser}]]</h3>
+		</div>
+		<div class="col-md-2">
+			<form th:action="@{/logout}" method="post">
+				<input type="submit" value="Sign Out" class="btn btn-danger"/>
+			</form>
+		</div>
+	</div>
+	<div>
+		<a class="btn btn-success" th:href="@{/}">Back to routines listing</a>
+		<br>
+	</div>
+	<div>
+		<h3 th:inline="text" th:text="'Balance total of this routine is: ' + ${balance}"></h3>
+		<h3 th:inline="text" th:text="'Total time spent on this routine is: ' + ${totalTime}"></h3>
+		<br>
+	</div>
+	<div>
+		<a class="btn btn-success" th:href="@{/addentry/{routineid}(routineid=${routId})}">Add an entry</a>
+		<a class="btn btn-success" th:href="@{/addentrytype/{routineid}(routineid=${routId})}"  th:text="'Add an ' + ${displayName}">Add an entry type</a>
+		<br>
+	</div>
+	<table class="table table-striped">
+		<tr>
+		    <th th:text="${displayName}">Entry</th>
+		    <th>Date</th>
+		    <th>Balance value</th>
+		    <th>Balance period</th>
+		    <th>Time (min)</th>
+		    <th>Additional information</th>
+		    <th></th>
+		    <th></th>
+		</tr>
+		<tr th:each = "entry : ${entries}">
+    		<td><a th:href="@{/editentrytype/{etid}(etid=${entry.entryType.entrytypeid})}" th:text="${entry.entryType.entryName}"></a></td>
+    		<td th:text="${entry.date}"></td>
+    		<td th:text="${entry.balanceValue}"></td>
+    		<td th:text="${entry.balancePeriod}"></td>
+    		<td th:text="${entry.time}"></td>
+    		<td th:text="${entry.addinfo}"></td>
+    		<td><a class="btn btn-danger" th:href="@{/deleteentry/{entryid}(entryid=${entry.entryid})}">Delete</a></td>
+    		<td><a class="btn btn-warning" th:href="@{/editentry/{entryid}(entryid=${entry.entryid})}">Edit</a></td>
+    	</tr>
+	</table>
+</div>
+</body>
+</html>

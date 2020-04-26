@@ -1,0 +1,50 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+	<link type="text/css" rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" th:href="@{https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css}"/>
+    <title>Routine Tracker</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<div class="container">
+	<div class="col-md-4">
+		<h1>Routines</h1>
+	</div>
+	<div class="row">
+		<div class="col-md-6">
+			<h3 th:inline="text">Welcome [[${#httpServletRequest.remoteUser}]]</h3>
+		</div>
+		<div class="col-md-2">
+			<a sec:authorize="hasAuthority('ADMIN')" class="btn btn-success" th:href="@{/adduser}">Add a new user</a>
+		</div>
+		<div class="col-md-2">
+			<a class="btn btn-warning" th:href="@{/editpass}">Change password</a>
+		</div>
+		<div class="col-md-2">
+			<form th:action="@{/logout}" method="post">
+				<input type="submit" value="Sign Out" class="btn btn-danger"/>
+			</form>
+	</div>
+	</div>
+	<table class="table table-striped">
+		<tr>
+		    <th>Routine</th>
+		    <th>Balance Expectation</th>
+		    <th>Description</th>
+		    <th>Current Balance</th>
+		    <th></th>
+		    <th></th>
+		</tr>
+		<tr th:each = "routine, i : ${routines}">
+    		<td><a th:href="@{/entries/{routineid}(routineid=${routine.routineid})}" th:text="${routine.name}"></a></td>
+    		<td th:text="${routine.balanceExpectation}"></td>
+    		<td th:text="${routine.description}"></td>
+    		<td th:text="${balances[i.index]}"></td>
+    		<td><a class="btn btn-danger" th:href="@{/deleteroutine/{routineid}(routineid=${routine.routineid})}">Delete</a></td>
+    		<td><a class="btn btn-warning" th:href="@{/editroutine/{routineid}(routineid=${routine.routineid})}">Edit</a></td>
+    	</tr>
+	</table>
+	<a class="btn btn-success" href="/addroutine">Add a routine</a>
+</div>	
+</body>
+</html>

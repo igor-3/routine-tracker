@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <title>Routine Tracker</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link type="text/css" rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" th:href="@{https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css}"/>
+</head>
+<body>
+<div class="container">
+	<h1>Add an entry type</h1>
+	<div>
+		<a class="btn btn-success" th:href="@{/entries/{routineid}(routineid=${entryType.routId})}">Back</a>
+		<br>
+	</div>
+	<div>
+		<form th:object="${entryType}" th:action="@{../saveentrytype}" action="#" method="post">
+		  	<label for="entryName">Type name</label>
+			<input type="text" th:field="*{entryName}" />
+			<div style="clear: both; display: block; height: 10px;"></div>
+			<input type="hidden" th:field="*{routine}"/>
+			<input type="hidden" th:field="*{routId}"/>
+			<input class="btn btn-success" type="submit" value="Save"></input>
+		</form>
+	</div>
+</div>
+</body>
+</html>

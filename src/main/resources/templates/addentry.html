@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <title>Routine Tracker</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link type="text/css" rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" th:href="@{https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css}"/>
+</head>
+<body>
+<div class="container">
+	<h1>Add an entry</h1>
+	<div>
+		<a class="btn btn-success" th:href="@{/entries/{routineid}(routineid=${entry.routId})}">Back</a>
+		<br>
+	</div>
+	<div>
+		<form th:object="${entry}" th:action="@{../saveentry}" action="#" method="post">
+			<label for="typelist">Entry type</label>
+			 <select id="typelist" th:field="*{entryType}" class="form-control">
+       			<option th:each="entryType: ${entrytypes}" th:value="${entryType.entrytypeid}" th:text="${entryType.entryName}"></option>
+    		</select>
+			<div style="clear: both; display: block; height: 10px;"></div>
+		  	<label for="date">Date (YYYY-MM-DD)</label>
+			<input type="text" th:field="*{date}" />
+			<div style="clear: both; display: block; height: 10px;"></div>
+		  	<label for="balanceValue">Balance Value</label>
+			<input type="text" th:field="*{balanceValue}" />
+			<div style="clear: both; display: block; height: 10px;"></div>
+			<label for="balancePeriod">Balance Period</label>
+			<input type="text" th:field="*{balancePeriod}" />
+			<div style="clear: both; display: block; height: 10px;"></div>
+		  	<label for="displayName">Time</label>
+			<input type="text" th:field="*{time}" />
+			<div style="clear: both; display: block; height: 10px;"></div>
+			<label for="addinfo">Additional information</label>
+			<input type="text" th:field="*{addinfo}" />
+			<input type="hidden" th:field="*{routine}" />
+			<input type="hidden" th:field="*{routId}" />
+			<div style="clear: both; display: block; height: 10px;"></div>
+			<input class="btn btn-success" type="submit" value="Save"></input>
+		</form>
+	</div>
+</div>
+</body>
+</html>

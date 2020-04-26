@@ -1,0 +1,34 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <title>Routine Tracker</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link type="text/css" rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" th:href="@{https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css}"/>
+</head>
+<body>
+<div class="container">
+	<h1>Add a routine</h1>
+	<div>
+		<a class="btn btn-success" th:href="@{/}">Back</a>
+		<br>
+	</div>
+	<div>
+		<form th:object="${routine}" th:action="@{saveroutine}" action="#" method="post">
+		  	<label for="name">Name</label>
+			<input type="text" th:field="*{name}" />
+			<div style="clear: both; display: block; height: 10px;"></div>
+		  	<label for="balanceExpectation">Balance Expectation</label>
+			<input type="text" th:field="*{balanceExpectation}" />
+			<div style="clear: both; display: block; height: 10px;"></div>
+		  	<label for="displayName">Display name for the type name</label>
+			<input type="text" th:field="*{displayName}" />
+			<div style="clear: both; display: block; height: 10px;"></div>
+			<label for="description">Description</label>
+			<input type="text" th:field="*{description}" />
+			<div style="clear: both; display: block; height: 10px;"></div>
+			<input class="btn btn-success" type="submit" value="Save"></input>
+		</form>
+	</div>
+</div>
+</body>
+</html>
